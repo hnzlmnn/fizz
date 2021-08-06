@@ -280,12 +280,17 @@ func (g *Generator) AddOperation(path, method, tag string, in, out reflect.Type,
 	}
 	// Generate additional responses from the operation
 	// informations.
+
 	for _, resp := range info.Responses {
 		if resp != nil {
+			var mt = to.ResponseMediaType()
+			if resp.MediaType != "" {
+				mt = resp.MediaType
+			}
 			if err := g.setOperationResponse(op,
 				reflect.TypeOf(resp.Model),
 				resp.Code,
-				to.ResponseMediaType(),
+				mt,
 				resp.Description,
 				resp.Headers,
 				resp.Example,

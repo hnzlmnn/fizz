@@ -34,4 +34,5 @@ type OperationResponse struct {
 	Headers     []*ResponseHeader
 	Example     interface{}
 	Examples    map[string]interface{}
+	MediaType   string
 }

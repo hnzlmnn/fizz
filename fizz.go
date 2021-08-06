@@ -311,6 +311,10 @@ func Deprecated(deprecated bool) func(*openapi.OperationInfo) {
 
 // Response adds an additional response to the operation.
 func Response(statusCode, desc string, model interface{}, headers []*openapi.ResponseHeader, example interface{}) func(*openapi.OperationInfo) {
+	var mt string
+	if model != nil {
+		mt, _ = model.(string)
+	}
 	return func(o *openapi.OperationInfo) {
 		o.Responses = append(o.Responses, &openapi.OperationResponse{
 			Code:        statusCode,
@@ -318,12 +322,17 @@ func Response(statusCode, desc string, model interface{}, headers []*openapi.Res
 			Model:       model,
 			Headers:     headers,
 			Example:     example,
+			MediaType:   mt,
 		})
 	}
 }
 
 // ResponseWithExamples is a variant of Response that accept many examples.
 func ResponseWithExamples(statusCode, desc string, model interface{}, headers []*openapi.ResponseHeader, examples map[string]interface{}) func(*openapi.OperationInfo) {
+	var mt string
+	if model != nil {
+		mt, _ = model.(string)
+	}
 	return func(o *openapi.OperationInfo) {
 		o.Responses = append(o.Responses, &openapi.OperationResponse{
 			Code:        statusCode,
@@ -331,6 +340,7 @@ func ResponseWithExamples(statusCode, desc string, model interface{}, headers []
 			Model:       model,
 			Headers:     headers,
 			Examples:    examples,
+			MediaType:   mt,
 		})
 	}
 }
