@@ -275,7 +275,7 @@ func (g *Generator) AddOperation(path, method, tag string, in, out reflect.Type,
 	// Generate the default response from the tonic
 	// handler return type. If the handler has no output
 	// type, the response won't have a schema.
-	if err := g.setOperationResponse(op, out, strconv.Itoa(info.StatusCode), to.MediaType(), info.StatusDescription, info.Headers, nil, nil, to); err != nil {
+	if err := g.setOperationResponse(op, out, strconv.Itoa(info.StatusCode), to.ResponseMediaType(), info.StatusDescription, info.Headers, nil, nil, to); err != nil {
 		return nil, err
 	}
 	// Generate additional responses from the operation
@@ -285,7 +285,7 @@ func (g *Generator) AddOperation(path, method, tag string, in, out reflect.Type,
 			if err := g.setOperationResponse(op,
 				reflect.TypeOf(resp.Model),
 				resp.Code,
-				to.MediaType(),
+				to.ResponseMediaType(),
 				resp.Description,
 				resp.Headers,
 				resp.Example,
@@ -437,7 +437,7 @@ func (g *Generator) setOperationParams(op *Operation, t, parent reflect.Type, al
 	// Replace the RequestBody's schema with a reference
 	// to the named schema in components/schemas
 	if op.RequestBody != nil {
-		mt := to.MediaType()
+		mt := to.RequestMediaType()
 		if mt == "" {
 			mt = anyMediaType
 		}
@@ -586,7 +586,7 @@ func (g *Generator) addStructFieldToOperation(op *Operation, t reflect.Type, idx
 		}
 		// Select the corresponding media type for the
 		// given field tag, or default to any type.
-		mt := to.MediaType()
+		mt := to.RequestMediaType()
 		if mt == "" {
 			mt = anyMediaType
 		}
@@ -605,7 +605,7 @@ func (g *Generator) addStructFieldToOperation(op *Operation, t reflect.Type, idx
 		} else {
 			schema = op.RequestBody.Content[mt].Schema.Schema
 		}
-		fname := fieldNameFromTag(sf, mediaTags[to.MediaType()])
+		fname := fieldNameFromTag(sf, mediaTags[to.RequestMediaType()])
 
 		// Check if a field with the same name already exists.
 		if _, ok := schema.Properties[fname]; ok {
@@ -1023,7 +1023,7 @@ func (g *Generator) flattenStructSchema(t, parent reflect.Type, schema *Schema, 
 			// Ignore unexported non-embedded fields.
 			continue
 		}
-		fname := fieldNameFromTag(f, mediaTags[to.MediaType()])
+		fname := fieldNameFromTag(f, mediaTags[to.RequestMediaType()])
 		if fname == "" {
 			// Field has no name, skip it.
 			continue

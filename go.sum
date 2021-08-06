@@ -71,6 +71,7 @@ github.com/grpc-ecosystem/grpc-gateway v1.9.0/go.mod h1:vNeuVxBJEsws4ogUvrchl83t
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/hnzlmnn/gadgeto v0.11.2-0.20210806194442-1052ba099f4d h1:d558gh476ujErlEJExmQ1PgcJ+czARKlf4Qct4cAXFw=
 github.com/hnzlmnn/gadgeto v0.11.2-0.20210806194442-1052ba099f4d/go.mod h1:xCuEAFgiD3jvZro/k5WzTZSEiHIjj3RSxWxiUcdRw0s=
+github.com/hnzlmnn/gadgeto v0.11.2-0.20210806200916-205a77cc7e9a h1:KmO4SialAyNNn4FkDypck72g6jJKN+4gTX80+tjZ388=
 github.com/hnzlmnn/gadgeto v0.11.2-0.20210806200916-205a77cc7e9a/go.mod h1:xCuEAFgiD3jvZro/k5WzTZSEiHIjj3RSxWxiUcdRw0s=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/jonboulle/clockwork v0.1.0/go.mod h1:Ii8DK3G1RaLaWxj9trq07+26W01tbo22gdxWY5EU2bo=
