@@ -357,6 +357,6 @@ curl -i http://localhost:4242/openapi.json
 
 ## Credits
 
-Fizz is based on [gin-gonic/gin](https://github.com/gin-gonic/gin) and use [gadgeto/tonic](https://github.com/loopfz/gadgeto/tree/master/tonic). :heart:
+Fizz is based on [gin-gonic/gin](https://github.com/gin-gonic/gin) and use [gadgeto/tonic](https://github.com/hnzlmnn/gadgeto/tree/master/tonic). :heart:
 
 <p align="right"><img src="https://forthebadge.com/images/badges/built-with-swag.svg"></p>

@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hnzlmnn/gadgeto/tonic"
 
-	"github.com/wI2L/fizz"
+	"github.com/hnzlmnn/fizz"
 	"github.com/hnzlmnn/fizz/openapi"
 )
 
@@ -43,13 +43,14 @@ func NewRouter() (*fizz.Fizz, error) {
 }
 
 func routes(grp *fizz.RouterGroup) {
+	t := tonic.PourTonic()
 	// Add a new fruit to the market.
 	grp.POST("", []fizz.OperationOption{
 		fizz.Summary("Add a fruit to the market"),
 		fizz.Response("400", "Bad request", nil, nil,
 			map[string]interface{}{"error": "fruit already exists"},
 		),
-	}, tonic.Handler(CreateFruit, 200))
+	}, t.Handler(CreateFruit, 200))
 
 	// Remove a fruit from the market,
 	// probably because it rotted.
@@ -59,12 +60,12 @@ func routes(grp *fizz.RouterGroup) {
 			"fruitNotFound": map[string]interface{}{"error": "fruit not found"},
 			"invalidApiKey": map[string]interface{}{"error": "invalid api key"},
 		}),
-	}, tonic.Handler(DeleteFruit, 204))
+	}, t.Handler(DeleteFruit, 204))
 
 	// List all available fruits.
 	grp.GET("", []fizz.OperationOption{
 		fizz.Summary("List the fruits of the market"),
 		fizz.Response("400", "Bad request", nil, nil, nil),
 		fizz.Header("X-Market-Listing-Size", "Listing size", fizz.Long),
-	}, tonic.Handler(ListFruits, 200))
+	}, t.Handler(ListFruits, 200))
 }

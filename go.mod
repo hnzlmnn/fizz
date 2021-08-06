@@ -11,6 +11,5 @@ require (
 	github.com/juju/errors v0.0.0-20200330140219-3fe23663418f
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/text v0.3.3
-	gopkg.in/go-playground/validator.v9 v9.30.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )
