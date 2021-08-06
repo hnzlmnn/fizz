@@ -8,7 +8,7 @@ import (
 	"github.com/hnzlmnn/gadgeto/tonic"
 
 	"github.com/wI2L/fizz"
-	"github.com/wI2L/fizz/openapi"
+	"github.com/hnzlmnn/fizz/openapi"
 )
 
 // NewRouter returns a new router for the

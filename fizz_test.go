@@ -18,7 +18,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v2"
 
-	"github.com/wI2L/fizz/openapi"
+	"github.com/hnzlmnn/fizz/openapi"
 )
 
 func TestMain(m *testing.M) {
