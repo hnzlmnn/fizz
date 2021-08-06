@@ -128,7 +128,9 @@ type In struct {
 func TestTonicHandler(t *testing.T) {
 	fizz := New()
 
-	fizz.GET("/foo/:a", nil, tonic.Handler(func(c *gin.Context, params *In) (*T, error) {
+	to := tonic.PourTonic()
+
+	fizz.GET("/foo/:a", nil, to.Handler(func(c *gin.Context, params *In) (*T, error) {
 		assert.Equal(t, 0, params.A)
 		assert.Equal(t, "foobar", params.B)
 		assert.Equal(t, "foobaz", params.C)
@@ -139,7 +141,7 @@ func TestTonicHandler(t *testing.T) {
 	// Create a router group to test that tonic handlers works with router groups.
 	grp := fizz.Group("/test", "Test Group", "Test Group")
 
-	grp.GET("/bar/:a", nil, tonic.Handler(func(c *gin.Context, params *In) (*T, error) {
+	grp.GET("/bar/:a", nil, to.Handler(func(c *gin.Context, params *In) (*T, error) {
 		assert.Equal(t, 42, params.A)
 		assert.Equal(t, "group-foobar", params.B)
 		assert.Equal(t, "group-foobaz", params.C)
@@ -239,6 +241,8 @@ type testInputModel2 struct {
 func TestSpecHandler(t *testing.T) {
 	fizz := New()
 
+	to := tonic.PourTonic()
+
 	fizz.GET("/test/:a",
 		[]OperationOption{
 			ID("GetTest"),
@@ -272,7 +276,7 @@ func TestSpecHandler(t *testing.T) {
 				Source: "curl http://0.0.0.0:8080",
 			}),
 		},
-		tonic.Handler(func(c *gin.Context) error {
+		to.Handler(func(c *gin.Context) error {
 			return nil
 		}, 200),
 	)
@@ -280,7 +284,7 @@ func TestSpecHandler(t *testing.T) {
 	fizz.GET("/test/:a/:b", []OperationOption{
 		ID("GetTest2"),
 		InputModel(&testInputModel{}),
-	}, tonic.Handler(func(c *gin.Context) error {
+	}, to.Handler(func(c *gin.Context) error {
 		return nil
 	}, 200))
 	infos := &openapi.Info{
@@ -295,7 +299,7 @@ func TestSpecHandler(t *testing.T) {
 			StatusDescription("201"),
 			StatusDescription("Created"),
 		},
-		tonic.Handler(func(c *gin.Context, in *testInputModel2) error {
+		to.Handler(func(c *gin.Context, in *testInputModel2) error {
 			return nil
 		}, 201),
 	)
@@ -391,10 +395,12 @@ func TestInvalidContentTypeOpenAPIHandler(t *testing.T) {
 func TestMultipleTonicHandler(t *testing.T) {
 	fizz := New()
 
+	to := tonic.PourTonic()
+
 	assert.Panics(t, func() {
 		fizz.GET("/:a", nil,
-			tonic.Handler(func(c *gin.Context) error { return nil }, 200),
-			tonic.Handler(func(c *gin.Context) error { return nil }, 200),
+			to.Handler(func(c *gin.Context) error { return nil }, 200),
+			to.Handler(func(c *gin.Context) error { return nil }, 200),
 		)
 	})
 }
@@ -407,8 +413,10 @@ func TestErrorGen(t *testing.T) {
 	}
 	fizz := New()
 
+	to := tonic.PourTonic()
+
 	assert.Panics(t, func() {
-		fizz.GET("/a", nil, tonic.Handler(func(c *gin.Context, param *In) error { return nil }, 200))
+		fizz.GET("/a", nil, to.Handler(func(c *gin.Context, param *In) error { return nil }, 200))
 	})
 }
 
@@ -437,11 +445,13 @@ func TestLastChar(t *testing.T) {
 func TestOperationContext(t *testing.T) {
 	fizz := New()
 
+	to := tonic.PourTonic()
+
 	const (
 		id   = "OperationContext"
 		desc = "Test for OpenAPI operation instance in Gin context"
 	)
-	tonicHandler := tonic.Handler(func(c *gin.Context) error {
+	tonicHandler := to.Handler(func(c *gin.Context) error {
 		op, err := OperationFromContext(c)
 		if err == nil && op.ID == id && op.Description == desc {
 			c.Status(http.StatusOK)
