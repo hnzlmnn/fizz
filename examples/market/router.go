@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/loopfz/gadgeto/tonic"
+	"github.com/hnzlmnn/gadgeto/tonic"
 
 	"github.com/wI2L/fizz"
 	"github.com/wI2L/fizz/openapi"

@@ -14,7 +14,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gofrs/uuid"
-	"github.com/loopfz/gadgeto/tonic"
+	"github.com/hnzlmnn/gadgeto/tonic"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v2"
 

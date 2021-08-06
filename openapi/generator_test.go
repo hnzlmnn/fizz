@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/Pallinder/go-randomdata"
-	"github.com/loopfz/gadgeto/tonic"
+	"github.com/hnzlmnn/gadgeto/tonic"
 	"github.com/stretchr/testify/assert"
 )
 

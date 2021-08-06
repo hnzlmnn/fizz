@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/loopfz/gadgeto/tonic"
+	"github.com/hnzlmnn/gadgeto/tonic"
 	"github.com/wI2L/fizz/openapi"
 )
 
